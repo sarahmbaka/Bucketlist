@@ -1,0 +1,72 @@
+.container{
+	background-color: #efefef;
+}
+
+.buckets div {
+	 margin-bottom: 15px;
+}
+.btn {
+	margin-bottom: 10px;
+}
+}
+
+.buckets div span{
+	color: #6666ff;
+	text-align: center;
+	font-size: 20px;
+
+}
+
+.buckets div span a{
+	text-decoration: none;
+}
+
+
+.buckets div div{
+	background-color: #fff;
+	padding: 10px 0;
+	border: 2px dotted  #6666ff;
+  border-radius: 10px;
+} 
+
+
+#addbucket {
+	padding: 10px 0;
+	border: 0;
+} 
+
+.item-done{
+	background-color: green;
+}
+
+.item-not-done{
+	background-color: red;
+}
+
+input[type="text"]{
+    display: block;
+    width: 300px;
+    height: 35px;
+    margin: 10px auto;
+    background: #fff;
+    border: 0px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    
+}
+
+input[type="submit"]{
+  display: block;
+  background: #1abc9d;
+  width: 300px;
+  padding: 12px;
+  cursor: pointer;
+  color: #fff;
+  border: 0px;
+  margin: auto;
+  border-radius: 5px;
+ 
+}
+
