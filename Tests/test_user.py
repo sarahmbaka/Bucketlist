@@ -26,7 +26,15 @@ class Test_user(unittest.TestCase):
         response = self.auth.register('sarah', '1234')
         self.assertEqual('User already registered', response)
 
+    def test_login_invalid_credentials(self):
+        """
+        Tests for successful user registartion
+        """
+        response = self.auth.login('sarah', '123')
+        self.assertEqual('Invalid Credentials', response)
+
     
+
     def tearDown(self):
         del self.auth
 
