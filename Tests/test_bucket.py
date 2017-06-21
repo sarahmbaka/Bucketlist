@@ -37,6 +37,13 @@ class Test_bucket(unittest.TestCase):
         response = self.auth.add_bucket('', 'Daisys wish list')
         self.assertEqual('Bucket name empty', response)
 
+    def test_bucket_update(self):
+        """
+        Tests for editing bucket details
+        """
+        response = self.auth.update_bucket('Travels', 'I updated my bucketlist')
+        self.assertEqual('Bucket updated', response)
+
     
 
     def tearDown(self):
