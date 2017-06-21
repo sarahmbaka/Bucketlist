@@ -24,3 +24,9 @@ class View():
             id = len(self.user_list) + 1
             self.user_list[user_name] = password
             return 'You have successfully registered'
+
+    def login(self, user_name, password):
+        if password == self.user_list[user_name]:
+            return 'Log in successful'
+        return 'Invalid Credentials'
+
