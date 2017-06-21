@@ -41,4 +41,11 @@ class View():
         return 'You have successfully added a bucket'
 
 
-    
+    def del_bucket(self, name):
+        for bucket in self.buckets_list:
+            if name == bucket.name:
+                self.buckets_list.remove(bucket)
+                return 'Bucket deleted'
+        return 'Bucket does not exist'
+
+
