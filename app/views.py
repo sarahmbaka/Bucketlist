@@ -68,3 +68,12 @@ class View():
                 return 'This bucket item already exists'
         self.bucketsitem_list.append(bucketsitem)
         return 'You have successfully added a bucket item'
+
+    def del_bucketitem(self, name):
+        for bucket_item in self.bucketsitem_list:
+            if name == bucket_item.name:
+                self.bucketsitem_list.remove(bucket_item)
+                return 'Bucket item deleted'
+        return 'Bucket item does not exist'
+
+    
