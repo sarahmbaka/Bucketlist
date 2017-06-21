@@ -49,3 +49,14 @@ class View():
         return 'Bucket does not exist'
 
 
+    def update_bucket(self, name, description):
+        if len(name) < 1:
+            return 'Bucket name empty'
+        for bucket in self.buckets_list:
+            if name == bucket.name:
+                self.buckets_list.remove(bucket)
+        bucket = Bucket(name, description)
+        self.buckets_list.append(bucket)
+        return 'Bucket updated'
+
+    
