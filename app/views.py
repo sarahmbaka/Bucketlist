@@ -76,4 +76,12 @@ class View():
                 return 'Bucket item deleted'
         return 'Bucket item does not exist'
 
-    
+    def update_bucketitem(self, name, description):
+        if len(name) < 1:
+            return 'Bucket name empty'
+        for bucket_item in self.bucketsitem_list:
+            if name == bucket_item.name:
+                self.bucketsitem_list.remove(bucket_item)
+        bucketsitem = Bucketitem(name, description)
+        self.bucketsitem_list.append(bucketsitem)
+        return 'Bucket item updated'
