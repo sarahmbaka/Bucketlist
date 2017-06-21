@@ -30,6 +30,13 @@ class Test_bucket(unittest.TestCase):
         response = self.auth.add_bucket('travel', "My wish list")
         self.assertEqual('This bucket already exists', response)
 
+    def test_bucket_empty_bucket_name(self):
+        """
+        Tests for empty bucket name during register
+        """
+        response = self.auth.add_bucket('', 'Daisys wish list')
+        self.assertEqual('Bucket name empty', response)
+
     
 
     def tearDown(self):
