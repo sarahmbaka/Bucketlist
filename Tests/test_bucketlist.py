@@ -37,6 +37,13 @@ class Test_bucketitem(unittest.TestCase):
         response = self.auth.add_bucketitem('', 'Daisys wish list')
         self.assertEqual('Bucket item name empty', response)
 
+    def test_bucket_item_update(self):
+        """
+        Tests for editing bucket item details
+        """
+        response = self.auth.update_bucketitem('Travels', 'I updated my bucketlist')
+        self.assertEqual('Bucket item updated', response)
+
     
 
     def tearDown(self):
