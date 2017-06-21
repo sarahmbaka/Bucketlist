@@ -40,6 +40,13 @@ class Test_user(unittest.TestCase):
         response = self.auth.register('', '1234')
         self.assertEqual('Name not provided', response)
 
+    def test_register_missing_password(self):
+        """
+        Tests for missing password on register
+        """
+        response = self.auth.register('sarah', '')
+        self.assertEqual('Password not provided', response)
+
     
 
     def tearDown(self):
