@@ -18,6 +18,15 @@ class Test_user(unittest.TestCase):
         response = self.auth.register('kerubo', '12345')
         self.assertEqual('You have successfully registered', response)
 
+    def test_register_existing_user(self):
+        """
+        Tests for registering an existing user
+        """
+        self.auth.register('sarah', '1234')
+        response = self.auth.register('sarah', '1234')
+        self.assertEqual('User already registered', response)
+
+    
     def tearDown(self):
         del self.auth
 
