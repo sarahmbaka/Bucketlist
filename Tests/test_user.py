@@ -33,6 +33,13 @@ class Test_user(unittest.TestCase):
         response = self.auth.login('sarah', '123')
         self.assertEqual('Invalid Credentials', response)
 
+    def test_register_missing_user_name(self):
+        """
+        Tests for missing user name
+        """
+        response = self.auth.register('', '1234')
+        self.assertEqual('Name not provided', response)
+
     
 
     def tearDown(self):
