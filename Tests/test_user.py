@@ -30,6 +30,7 @@ class Test_user(unittest.TestCase):
         """
         Tests for successful user registartion
         """
+        self.auth.register('sarah', '1234')
         response = self.auth.login('sarah', '123')
         self.assertEqual('Invalid Credentials', response)
 
@@ -47,13 +48,7 @@ class Test_user(unittest.TestCase):
         response = self.auth.register('sarah', '')
         self.assertEqual('Password not provided', response)
 
-    def test_register_username_taken(self):
-        """
-        Tests for already existing username
-        """
-        self.auth.register('sarah', '12345')
-        response = self.auth.register('sarah', '12345')
-        self.assertEqual('Username is already taken', response)
+    
 
     def tearDown(self):
         del self.auth
