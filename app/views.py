@@ -59,4 +59,12 @@ class View():
         self.buckets_list.append(bucket)
         return 'Bucket updated'
 
-    
+    def add_bucketitem(self, name, description):
+        if len(name) < 1:
+            return 'Bucket item name empty'
+        bucketsitem = Bucketitem(name, description)
+        for bucket_item in self.bucketsitem_list:
+            if name == bucket_item.name:
+                return 'This bucket item already exists'
+        self.bucketsitem_list.append(bucketsitem)
+        return 'You have successfully added a bucket item'
