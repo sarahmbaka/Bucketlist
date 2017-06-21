@@ -30,3 +30,15 @@ class View():
             return 'Log in successful'
         return 'Invalid Credentials'
 
+    def add_bucket(self, name, description):
+        if len(name) < 1:
+            return 'Bucket name empty'
+        bucket = Bucket(name, description)
+        for bucket in self.buckets_list:
+            if name == bucket.name:
+                return 'This bucket already exists'
+        self.buckets_list.append(bucket)
+        return 'You have successfully added a bucket'
+
+
+    
