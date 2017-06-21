@@ -23,6 +23,13 @@ class Test_bucketitem(unittest.TestCase):
         response = self.auth.del_bucketitem('travel')
         self.assertEqual('Bucket item deleted', response)
 
+    def test_bucket_item_add_existing(self):
+        """
+        Tests for adding existing bucket item
+        """
+        response = self.auth.add_bucketitem('travel', "My wish list")
+        self.assertEqual('This bucket item already exists', response)
+
     
 
     def tearDown(self):
