@@ -16,6 +16,13 @@ class Test_bucketitem(unittest.TestCase):
         response = self.auth.add_bucketitem('travel', 'My travel wish list')
         self.assertEqual('You have successfully added a bucket item', response)
 
+    def test_bucket_item_delete(self):
+        """
+        Tests for successful delete of item
+        """
+        response = self.auth.del_bucketitem('travel')
+        self.assertEqual('Bucket item deleted', response)
+
     
 
     def tearDown(self):
