@@ -44,7 +44,12 @@ class Test_bucket(unittest.TestCase):
         response = self.auth.update_bucket('Travels', 'I updated my bucketlist')
         self.assertEqual('Bucket updated', response)
 
-    
+    def test_bucket_delete_none_existant_bucket(self):
+        """
+        Tests for delete of buckets that do not exist
+        """
+        response = self.auth.del_bucket('Bucket1')
+        self.assertEqual('Bucket does not exist', response)
 
     def tearDown(self):
         del self.auth
