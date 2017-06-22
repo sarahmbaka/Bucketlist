@@ -150,7 +150,7 @@ def del_bucketitem(item_name):
     return 'Bucket item does not exist'
 
 
-@app.route('/edit_item')
+@app.route('/edit_item',methods=['POST'])
 def update_bucketitem(item_name):
     if request.method == 'POST':
         name = request.form['bucketname']
