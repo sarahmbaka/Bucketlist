@@ -1,58 +1,75 @@
 import unittest
-from app.views import View
 
-class Test_bucket(unittest.TestCase):
+from app import app
+from app.views import buckets_list
+
+
+class TestBucket(unittest.TestCase):
     """
-    This calss tests Bucket functionality
+    This is a class that tests the Bucket functionality
     """
     def setUp(self):
-        """setup"""
-        self.auth = View()
+        """
+        setup
+        """
+        self.app = app.test_client()
+        data = dict(fname="kerubo", lname="12345")
+        self.app.post('/register', data=data, follow_redirects=True)
+        data1 = dict(user_name="kerubo", password="12345")
+        self.app.post('/login', data=data1, follow_redirects=True)
 
     def test_bucket_add(self):
         """
         Tests for successful bucket add
         """
-        response = self.auth.add_bucket('travel', 'My travel wish list')
-        self.assertEqual('You have successfully added a bucket', response)
+        data = dict(bucketname="test", bucketdesc="test2")
+        response = self.app.post('/newbucket', data=data, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_bucket(self):
+        """
+        Tests for successful view bucket
+        """
+        response = self.app.post('/index', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_bucket_delete(self):
+        """"
+        Tests for delete bucket
         """
-        Tests for successful delete of item
-        """
-        response = self.auth.del_bucket('travel')
-        self.assertEqual('Bucket deleted', response)
+        data = dict(bucketname="test", bucketdesc="test2")
+        self.app.post('/newbucket', data=data, follow_redirects=True)
+        response = self.app.delete('/del_bucket/test', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_bucket_add_existing_bucket(self):
         """
         Tests for adding existing bucket
         """
-        response = self.auth.add_bucket('travel', "My wish list")
-        self.assertEqual('This bucket already exists', response)
+        data = dict(bucketname="test", bucketdesc="test2")
+        self.app.post('/newbucket', data=data, follow_redirects=True)
+        initial_length = len(buckets_list)
+        self.app.post('/newbucket', data=data, follow_redirects=True)
+        new_length = len(buckets_list)
+        self.assertEqual(initial_length, new_length)
 
     def test_bucket_empty_bucket_name(self):
         """
         Tests for empty bucket name during register
         """
-        response = self.auth.add_bucket('', 'Daisys wish list')
-        self.assertEqual('Bucket name empty', response)
+        data = dict(bucketname="", bucketdesc="test2")
+        response = self.app.post('/newbucket', data=data, follow_redirects=True)
+        self.assertEqual(400, response.status_code)
 
-    def test_bucket_update(self):
-        """
-        Tests for editing bucket details
-        """
-        response = self.auth.update_bucket('Travels', 'I updated my bucketlist')
-        self.assertEqual('Bucket updated', response)
-
-    def test_bucket_delete_none_existant_bucket(self):
+    def test_delete_none_existent_bucket(self):
         """
         Tests for delete of buckets that do not exist
         """
-        response = self.auth.del_bucket('Bucket1')
-        self.assertEqual('Bucket does not exist', response)
+        response = self.app.delete('/del_bucket/no_bucket', follow_redirects=True)
+        self.assertEqual(response.status_code, 400)
 
     def tearDown(self):
-        del self.auth
+        del self.app
 
 if __name__ == '__main__':
     unittest.main()

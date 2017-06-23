@@ -1,58 +1,46 @@
 import unittest
 
-from app.views import View
+from app import app
 
 
-class Test_user(unittest.TestCase):
+class TestUser(unittest.TestCase):
     """
     This is a class that tests ther Users functionality
     """
     def setUp(self):
         """setup"""
-        self.auth = View()
+        self.app = app.test_client()
 
     def test_register_successful_registration(self):
         """
-        Tests for successful user registartion
+        Tests for successful user registration
         """
-        response = self.auth.register('kerubo', '12345')
-        self.assertEqual('You have successfully registered', response)
+        data = dict(fname="kerubo", lname="12345")
+        response = self.app.post('/register', data=data, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
-    def test_register_existing_user(self):
+    def test_login_successful(self):
         """
-        Tests for registering an existing user
+        Tests for successful user registration
         """
-        self.auth.register('sarah', '1234')
-        response = self.auth.register('sarah', '1234')
-        self.assertEqual('User already registered', response)
+        data1 = dict(fname="kerubo", lname="12345")
+        self.app.post('/register', data=data1, follow_redirects=True)
+        data = dict(user_name="kerubo", password="12345")
+        response = self.app.post('/login', data=data, follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
-    def test_login_invalid_credentials(self):
-        """
-        Tests for successful user registartion
-        """
-        self.auth.register('sarah', '1234')
-        response = self.auth.login('sarah', '123')
-        self.assertEqual('Invalid Credentials', response)
-
-    def test_register_missing_user_name(self):
-        """
-        Tests for missing user name
-        """
-        response = self.auth.register('', '1234')
-        self.assertEqual('Name not provided', response)
-
-    def test_register_missing_password(self):
-        """
-        Tests for missing password on register
-        """
-        response = self.auth.register('sarah', '')
-        self.assertEqual('Password not provided', response)
-
-    
+    #
+    # def test_login_invalid_credentials(self):
+    #     """
+    #     Tests for successful user registartion
+    #     """
+    #     register('sarah', '1234')
+    #     response = login('sarah', '123')
+    #     self.assertEqual('Invalid Credentials', response)
+    #
 
     def tearDown(self):
-        del self.auth
+        del self.app
 
 if __name__ == '__main__':
     unittest.main()
-        
