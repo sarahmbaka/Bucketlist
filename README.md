@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/sarahmbaka/Bucketlist.svg?branch=master)](https://travis-ci.org/sarahmbaka/Bucketlist)
-
+[![Build Status](https://travis-ci.org/sarahmbaka/Bucketlist.svg?branch=develop)](https://travis-ci.org/sarahmbaka/Bucketlist)
+[![Coverage Status](https://coveralls.io/repos/github/sarahmbaka/Bucketlist/badge.svg?branch=Tests)](https://coveralls.io/github/sarahmbaka/Bucketlist?branch=Tests)
 ## What is a Bucketlist?
 
 A Bucketlist is a number of experiences or achievements that a person hopes to have or accomplish during their lifetime.
