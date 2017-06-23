@@ -9,7 +9,7 @@ install:
 # command to run tests
 script:
   # coverage run -m unittest
-  nosetests --with-coverage
+  nosetests --with-coverage --cover-package=app
 
 after_success:
   coveralls
