@@ -39,7 +39,7 @@ class TestBucket(unittest.TestCase):
         """
         data = dict(bucketname="test", bucketdesc="test2")
         self.app.post('/newbucket', data=data, follow_redirects=True)
-        response = self.app.delete('/del_bucket/test', follow_redirects=True)
+        response = self.app.get('/del_bucket/test', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
     def test_bucket_add_existing_bucket(self):
@@ -65,7 +65,7 @@ class TestBucket(unittest.TestCase):
         """
         Tests for delete of buckets that do not exist
         """
-        response = self.app.delete('/del_bucket/no_bucket', follow_redirects=True)
+        response = self.app.get('/del_bucket/no_bucket', follow_redirects=True)
         self.assertEqual(response.status_code, 400)
 
     def tearDown(self):
