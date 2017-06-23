@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Bucket List</h1>
+
+<div class="stand">
+  <div class="outer-screen">
+    <div class="inner-screen">
+      
+      <form action="/login" method="post">
+      First name: <input type="text" name="user_name"><br>
+      Last name: <input type="password" name="password"><br>
+      <input type="submit" value="Submit">
+    </form>
+    </div>
+  </div> 
+</div>
+{% endblock %}
