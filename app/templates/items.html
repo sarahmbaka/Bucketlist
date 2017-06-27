@@ -1,185 +1,47 @@
 {% extends "base.html" %}
 {% block  body %}
-      <div class="container">
-      
 
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1 >{{bucket}}</h1>
+							<div class="table-wrapper">
+                                <a class="icon fa fa-plus fa-lg"  data-toggle="modal" data-target="#additem">Add Item</a>
+								<table class="alt">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Description</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for item in bucketitem %}
+										<tr>
+											<td> {{ item.name }}</td>
+											<td> {{ item.description }}</td>
+											<td><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#edititem"></i>
+											<a href="/delitem/{{ item.name }}">  <i class="fa fa-trash-o" aria-hidden="true"></i>
+											</a></td>
+										</tr>
+									{% endfor %}
 
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">BucketList</a>
-            </div>
+										
+										<tr>
+											<td>Item Four</td>
+											<td>Vitae integer tempus condimentum.</td>
+											<td>19.99</td>
+										</tr>
+										<tr>
+											<td>Item Five</td>
+											<td>Ante turpis integer aliquet porttitor.</td>
+											<td>29.99</td>
+										</tr>
+									</tbody>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buckets <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal">Add new</a></li>
-                    <li><a href="#">View All</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <li><a href="#" style="float:right;" data-toggle="modal" data-target="#additem">Logout</a></li>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-
-
-
-          <h2>Bucket list 1</h2>
-              <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#additem">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Item
-              </button>
-          {% for item in bucketitem %}
-          <div class="panel-group">
-            <div class="panel panel-default">
-              <div class="panel-heading item-done">
-                <h4 class="panel-title">
-                  <span class="glyphicon glyphicon-ok-circle" style="color:green"></span> &nbsp; <a data-toggle="collapse" href=#{{ item.name }}>{{ item.name }}</a>
-                </h4>
-              </div>
-              <div id={{ item.name }} class="panel-collapse collapse">
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <input type="checkbox" checked="checked" /> Done |   <span class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#edititem" style="color:orange">Edit | <span class="glyphicon glyphicon-trash" data-toggle="modal" data-target="#delete" style="color:blue">Delete
-                    </div>
-                  </div>
-
-                  <hr />
-                  <div class="row">
-                    <div class="col-md-12">
-                      {{ item.name }}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          {% endfor %}
-
-
-
-
-
-
-
-
-
-
-      </div>
-
-
-
-      <!-- start MODEL -->
-      <div class="modal fade" id="additem" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">New Item</h4>
-            </div>
-            <div class="modal-body">
-              <form action="/additem" method="post">
-                <input type="text" class="zocial-dribbble" placeholder=" Bucket Name" name="bucketname"/>
-                 <input type="text" class="zocial-dribbble" placeholder=" Bucket Description" name="bucketdesc"/>
-                 <input type="submit" value="Add Item"/>
-               </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end MODEL -->
-
-      <!-- start MODEL -->
-      <div class="modal fade" id="edititem" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Edit Item</h4>
-            </div>
-            <div class="modal-body">
-              <div class="form">
-                <input type="text" class="zocial-dribbble" placeholder=" Item Name" />
-                 <input type="text" class="zocial-dribbble" placeholder=" Item Description" />
-                 <input type="submit" value="Edit" />       
-              </div> 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end MODEL -->
-
-      <!-- start MODEL -->
-      <div class="modal fade" id="delete" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Delete Item</h4>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete these item?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end MODEL -->
-
-
-       <!-- start MODEL -->
-      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Bucket</h4>
-            </div>
-            <div class="modal-body">
-            <form action="/additem" method="post">
-                <input type="text" class="zocial-dribbble" placeholder=" Bucket Name" name="bucketname"/>
-                 <input type="text" class="zocial-dribbble" placeholder=" Bucket Description" name="bucketdesc"/>
-                 <input type="submit" value="Add Bucket"/>
-               </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end MODEL -->
-      <script src="/static/js/jquery-3.2.1.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
+								</table>
+							</div>
+						</div>
+					</div>
 
 {% endblock %}
