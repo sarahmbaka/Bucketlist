@@ -52,13 +52,6 @@ class Test_bucket(unittest.TestCase):
         response = self.app.post('/additem', data=data, follow_redirects=True)
         self.assertEqual(response.status_code, 409)
 
-    # def test_bucket_item_delete_none_existant(self):
-    #     """
-    #     Tests for delete of buckets item that do not exist
-    #     """
-    #     response = self.auth.del_bucketitem('Bucket1')
-    #     self.assertEqual('Bucket item does not exist', response)
-
     def tearDown(self):
         del self.app
 

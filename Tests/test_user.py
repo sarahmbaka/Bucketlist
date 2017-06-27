@@ -29,16 +29,6 @@ class TestUser(unittest.TestCase):
         response = self.app.post('/login', data=data, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
-    #
-    # def test_login_invalid_credentials(self):
-    #     """
-    #     Tests for successful user registartion
-    #     """
-    #     register('sarah', '1234')
-    #     response = login('sarah', '123')
-    #     self.assertEqual('Invalid Credentials', response)
-    #
-
     def tearDown(self):
         del self.app
 
