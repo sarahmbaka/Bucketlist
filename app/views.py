@@ -1,6 +1,6 @@
 from werkzeug.utils import redirect
 
-from app.bucket_item import Bucketitem
+from app.bucket_item import BucketItem
 from app.bucket import Bucket
 from app.user import User
 from app import app
@@ -60,7 +60,7 @@ def view_buckets():
         for bucket in buckets_list:
             if User.current_user == bucket.owner:
                 view_bucket.append(bucket)
-        return render_template('index.html', buckets=view_bucket), 200
+        return render_template('index.html', buckets=view_bucket, user=User.current_user), 200
 
 
 @app.route('/newbucket', methods=['GET', 'POST'])
@@ -81,22 +81,23 @@ def add_bucket():
         return redirect('/index'), 200
 
 
-@app.route('/update_bucket', methods=['GET', 'POST'])
-def update_bucket(self, name, description):
+@app.route('/update_bucket/<bucket_name>', methods=['POST'])
+def update_bucket(bucket_name):
     """"
     Method to update  bucket information
     """
+    name = request.form['bucketname']
+    description = request.form['bucketdesc']
+    # parent_bucket = Bucket.current_bucket
     if request.method == 'POST':
         if len(name) < 1:
             return 'Bucket name empty'
-        for bucket in self.buckets_list:
-            if name == bucket.name:
-                self.buckets_list.remove(bucket)
-        bucket = Bucket(name, description)
-        self.buckets_list.append(bucket)
-        return 'Bucket updated'
-    elif request.method == 'GET':
-        return redirect('/index')
+        for bucket in buckets_list:
+            if bucket_name == bucket.name:
+                bucket.name = name
+                bucket.description = description
+                Bucket.current_bucket = name
+        return redirect(url_for('view_bucketsitems', bucket_parent=Bucket.current_bucket)), 200
 
 
 @app.route('/additem', methods=['GET', 'POST'])
@@ -112,7 +113,7 @@ def add_bucketitem():
             return render_template('items.html', error_message='Bucket item name empty')
 
         parent_bucket = Bucket.current_bucket
-        bucketsitem = Bucketitem(name, description, parent_bucket)
+        bucketsitem = BucketItem(name, description, parent_bucket)
         for bucket_item in bucketsitem_list:
             if name == bucket_item.name:
                 return redirect('/bucketlist', 'This bucket item already exists'), 409
@@ -161,8 +162,8 @@ def del_bucket(bucketname):
             return redirect('/index', 'Bucket deleted'), 200
 
 
-@app.route('/edit_item', methods=['POST'])
-def update_bucketitem():
+@app.route('/edit_item/<item_name>', methods=['POST'])
+def update_bucketitem(item_name):
     """
     Updates bucket item
     """
@@ -171,9 +172,10 @@ def update_bucketitem():
         description = request.form['bucketdesc']
         if len(name) < 1:
             return 'Bucket name empty'
+        parent_bucket = Bucket.current_bucket
         for bucket_item in bucketsitem_list:
-            if name == bucket_item.name:
-                bucketsitem_list.remove(bucket_item)
-        bucketsitem = Bucketitem(name, description)
-        bucketsitem_list.append(bucketsitem)
-        return redirect(url_for('view_bucketsitems', bucket_parent=Bucket.current_bucket))
+            if item_name == bucket_item.name:
+                bucket_item.name = name
+                bucket_item.description = description
+
+        return redirect(url_for('view_bucketsitems', bucket_parent=parent_bucket)), 200
