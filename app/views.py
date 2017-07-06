@@ -161,8 +161,8 @@ def del_bucket(bucketname):
             return redirect('/index', 'Bucket deleted'), 200
 
 
-@app.route('/edit_item', methods=['POST'])
-def update_bucketitem():
+@app.route('/edit_item/<item_name>', methods=['POST'])
+def update_bucketitem(item_name):
     """
     Updates bucket item
     """
@@ -171,9 +171,10 @@ def update_bucketitem():
         description = request.form['bucketdesc']
         if len(name) < 1:
             return 'Bucket name empty'
+        parent_bucket = Bucket.current_bucket
         for bucket_item in bucketsitem_list:
-            if name == bucket_item.name:
-                bucketsitem_list.remove(bucket_item)
-        bucketsitem = Bucketitem(name, description)
-        bucketsitem_list.append(bucketsitem)
-        return redirect(url_for('view_bucketsitems', bucket_parent=Bucket.current_bucket))
+            if item_name == bucket_item.name:
+                bucket_item.name = name
+                bucket_item.description = description
+
+        return redirect(url_for('index', bucket_parent=parent_bucket)), 200
