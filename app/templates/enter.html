@@ -1,17 +1,58 @@
-{% extends 'base.html' %}
-{% block body %}
-<h1>Bucket List</h1>
+<!DOCTYPE HTML>
 
-<div class="stand">
-  <div class="outer-screen">
-    <div class="inner-screen">
-      
-      <form action="/login" method="post">
-      First name: <input type="text" name="user_name"><br>
-      Last name: <input type="password" name="password"><br>
-      <input type="submit" value="Submit">
-    </form>
-    </div>
-  </div> 
-</div>
-{% endblock %}
+<html>
+	<head>
+		<title>Bucket List</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/bootstrap.min.css')}}"/>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/bootstrap.min.css')}}"/>
+        <link rel="stylesheet" href="{{ url_for('static',filename ='css/main.css')}}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	</head>
+    <body>
+            <div id="wrapper">
+                <div id="main">
+						<div class="inner">
+                                <section>
+									<h2>Log In</h2>
+									<form method="post" action="/login">
+										<div class="row uniform">
+											<div class="6u 12u$(small)">
+												<input type="text" name="user_name"  value="" placeholder="User Name" />
+											</div>
+
+
+											<div class="6u$ 12u$(small)">
+												<input type="password" name="password"  value="" placeholder="Password" />
+											</div>
+
+											<div class="6u 12u$(small)">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Remenber me</label>
+											</div>
+
+
+											<div class="12u$">
+												<ul class="actions">
+
+													<li><input type="submit" value="Submit"></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</section>
+                        </div>
+                </div>
+            </div>
+    </body>
+<!-- Scripts -->
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/skel.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+	</body>
+</html>

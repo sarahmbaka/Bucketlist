@@ -1,19 +1,142 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+
 <html>
-<head>
-<title>bucket list application </title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/bootstrap.min.css')}}"/>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/custom.css') }}" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<head>
+		<title>Bucket List</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/bootstrap.min.css')}}"/>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='css/bootstrap.min.css')}}"/>
+        <link rel="stylesheet" href="{{ url_for('static',filename ='css/main.css')}}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="/index" class="logo">
+									<span class="symbol"><img src="/static/image/logo.svg" alt="" /></span><span class="title">Bucket List</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="/index">Home</a></li>
+							<li><a href="/login">Logout</a></li>
+							<li></li>
+						</ul>
+					</nav>
+
+                {% block body %}
+                {% endblock %}
+
+                <!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+						</div>
+					</footer>
+
+			</div>
 
 
-</head>
-<body>
+                <!-- start MODEL -->
+      <div class="modal fade" id="additem" role="dialog">
+        <div class="modal-dialog">
 
-{% block body %}
-{% endblock %}
- <script src="static/js/jquery-3.2.1.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-</body>
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">New Item</h4>
+            </div>
+            <div class="modal-body">
+              <form action="/additem" method="post">
+                <input type="text" class="zocial-dribbble" placeholder=" Item Name" name="bucketname"/>
+                 <input type="text" class="zocial-dribbble" placeholder=" Item Description" name="bucketdesc"/>
+                 <input type="submit" value="Add Item"/>
+               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end MODEL -->
+
+        <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Add Bucket</h4>
+                    </div>
+                    <div class="modal-body">
+                     <div class="form">
+                       <form action="/newbucket" method="post">
+                        <input type="text" class="zocial-dribbble" placeholder=" Bucket Name" name="bucketname"/>
+                         <input type="text" class="zocial-dribbble" placeholder=" Bucket Description" name="bucketdesc"/>
+                         <input type="submit" value="Add Bucket"/>
+                       </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+		 <div class="modal fade" id="editbucket" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Add Bucket</h4>
+                    </div>
+                    <div class="modal-body">
+                     <div class="form">
+                       <form action="/newbucket" method="post">
+                        <input type="text" class="zocial-dribbble" placeholder=" Bucket Name" name="bucketname"/>
+                         <input type="text" class="zocial-dribbble" placeholder=" Bucket Description" name="bucketdesc"/>
+                         <input type="submit" value="Add Bucket"/>
+                       </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+		<!-- Scripts -->
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/skel.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+	</body>
 </html>
-
