@@ -1,4 +1,4 @@
-class Bucketitem:
+class BucketItem:
     """
     initializes bucket item
 
@@ -8,5 +8,3 @@ class Bucketitem:
         self.description = description
         self.parent_bucket = parent_bucket
         self.status = status
-
-        

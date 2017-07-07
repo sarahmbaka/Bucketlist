@@ -40,6 +40,7 @@ class TestBucket(unittest.TestCase):
         data = dict(bucketname="test", bucketdesc="test2")
         self.app.post('/newbucket', data=data, follow_redirects=True)
         response = self.app.get('/del_bucket/test', follow_redirects=True)
+        print(response.get_data(), "response")
         self.assertEqual(response.status_code, 200)
 
     def test_bucket_add_existing_bucket(self):
